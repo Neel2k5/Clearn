@@ -13,7 +13,7 @@ This repository is simply following my learning of ML algorithms and the implent
 
 ## :file_folder: Contents
 
-1. [Linear Regression Model](Regression/LinearRegression)
+1. [Linear Regression Model](./Regression/LinearRegression)
 
 ---
 ## Contributions
