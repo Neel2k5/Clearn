@@ -21,7 +21,7 @@
 
 #include "linear_regression.h"
 
-void linear_regression(LinearRegressionResult *result_set, double *x_data, double *y_data, int number_of_data){
+void linear_regression_train(LinearRegressionResult *result_set, double *x_data, double *y_data, int number_of_data){
     // To calculate the slope the formula is slope=(mean(xy)-mean(x)mean(y))/(mean(x^2)-mean(x)^2)
     double slope = 0,
            x_mean = 0,
@@ -51,3 +51,9 @@ void linear_regression(LinearRegressionResult *result_set, double *x_data, doubl
     //result might be slightly different from manually calculated result due to floating point precision 
    
 }
+
+double linear_regression_predict(LinearRegressionResult result_set, double x_new){
+    // Uses y=mx+c with trained m and c
+    return (result_set.slope*x_new + result_set.intercept);
+}
+

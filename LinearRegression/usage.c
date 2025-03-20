@@ -1,3 +1,24 @@
+/*
+ * Apache License
+ * Version 2.0, January 2004
+ * http://www.apache.org/licenses/
+ * 
+ * Copyright 2025 Swapnaneel Dutta
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -18,10 +39,11 @@ int main(){
                    43.23, 44.35, 45.46, 46.57, 47.68, 48.79, 49.89, 50.90, 51.01, 52.12};
 
     LinearRegressionResult result;
-    linear_regression(&result,x_data,y_data,50);
+    linear_regression_train(&result,x_data,y_data,50);
     printf("\nResult:\nslope = %lf\nintercept = %lf\n",result.slope,result.intercept);
     double new_x=7.908;
-    double predicted_y = result.slope*new_x + result.intercept;
+    
+    double predicted_y = linear_regression_predict(result,new_x);
     printf("\nPredicted y for x = %lf is y=%lf\n",new_x,predicted_y);
 
     

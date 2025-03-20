@@ -1,3 +1,25 @@
+/*
+ * Apache License
+ * Version 2.0, January 2004
+ * http://www.apache.org/licenses/
+ * 
+ * Copyright 2025 Swapnaneel Dutta
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+
+
 #ifndef LINEAR_REGRESSION_H
 #define LINEAR_REGRESSION_H
 
@@ -13,10 +35,10 @@ double intercept;
 
 
 /*
- * Function: linear_regression
+ * Function: linear_regression_train
  */
 
-void linear_regression(LinearRegressionResult *result_set,double *x_data, double *y_data, int number_of_data);
+void linear_regression_train(LinearRegressionResult *result_set,double *x_data, double *y_data, int number_of_data);
 /* ----------------------------
  * This function performs Simple Linear Regression (SLR) to find the best-fit line 
  * through a set of data points. The goal is to determine the line that best models 
@@ -77,5 +99,61 @@ void linear_regression(LinearRegressionResult *result_set,double *x_data, double
  *      the sum of squared residuals (differences between observed and predicted values).
  *    - **Residuals**: The differences between observed values and the corresponding predicted values.
  */
+
+
+/*
+ * Function: linear_regression_predict
+ */
+
+double linear_regression_predict(LinearRegressionResult result_set, double x_new);
+/* ----------------------------
+ * This function predicts the dependent variable (y) for a new value of the independent 
+ * variable (x_new) based on a trained linear regression model. The model is represented 
+ * by the slope (m) and intercept (b), which are the results of a previously performed 
+ * linear regression analysis.
+ *
+ * The function calculates the predicted value of y using the simple linear regression 
+ * equation:
+ *    y = m * x + b
+ *
+ * Where:
+ *    - m is the slope of the regression line (accessed from result_set.slope)
+ *    - b is the intercept of the regression line (accessed from result_set.intercept)
+ *    - x is the new value of the independent variable (x_new) for which we want to predict y
+ *
+ * The function assumes that the `LinearRegressionResult` structure contains the slope (m) 
+ * and intercept (b) derived from a previous training step (such as the `linear_regression_train` function).
+ *
+ * Arguments:
+ *    - result_set: A `LinearRegressionResult` structure containing the trained model, 
+ *      which includes the slope (m) and intercept (b) values for the regression line.
+ *    - x_new: A double representing the new independent variable value (x) for which 
+ *      the prediction of y is to be made.
+ *
+ * Returns:
+ *    - This function returns a `double`, which is the predicted value of the dependent 
+ *      variable y for the given value of x_new.
+ *
+ * Example:
+ *    LinearRegressionResult result_set = {2.5, 1.0}; // Example model with slope 2.5 and intercept 1.0
+ *    double x_new = 10.0;
+ *    double y_pred = linear_regression_predict(result_set, x_new); 
+ *    // y_pred will be 26.0 since y = 2.5 * 10 + 1.0
+ *
+ * Notes:
+ *    - The function assumes that the `LinearRegressionResult` contains valid, previously 
+ *      computed slope (m) and intercept (b) values. If these values are not properly 
+ *      set, the function may not produce accurate predictions.
+ *    - The function uses simple linear regression and assumes that the relationship 
+ *      between the independent and dependent variables is linear.
+ *    - This function does not perform any validation of the inputs. It is the caller's 
+ *      responsibility to ensure that the `result_set` contains valid regression coefficients 
+ *      and that `x_new` is within a reasonable range based on the dataset.
+ *    - The function is designed for cases where a linear model has already been trained. 
+ *      If the model has not been trained (e.g., `result_set` contains incorrect or default values), 
+ *      the predictions may not be meaningful.
+ */
+
+
 
 #endif // LINEAR_REGRESSION_H
