@@ -8,12 +8,20 @@ CLearn's goal is to not only facilitate the usage of Machine Learning models in 
 #### :pushpin: From the Author
 This repository is simply following my learning of ML algorithms and the implentations may not be the most efficient in terms of logic but are just basic to provide a more clear understanding. This project is under [LICENSE](LICENSE.md)
 
+---
+## Dependencies
 
+I've tried my best to avoid dependencies, however building complex mathematic subroutines go out of scope of the project.
+
+1. [GNU Scientific Library](https://www.gnu.org/software/gsl/doc/latex/gsl-ref.pdf)
+Used for the wide range of linear algebra utilities that are essential for models.
+[GSL Installation](Dependencies/GSL_installation.md)
 ---
 
 ## :file_folder: Contents
 
 1. [Linear Regression Model](https://github.com/Neel2k5/Clearn/tree/master/LinearRegression)
+2. [Multiple Linear Regression Model](https://github.com/Neel2k5/Clearn/tree/master/MultipleLinearRegression)
 
 ---
 ## Contributions

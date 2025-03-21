@@ -1,6 +1,6 @@
 # Linear Regression 
 ---
-[Linear regression](https://en.wikipedia.org/wiki/Linear_regression) is a statistical method used to model the relationship between a dependent variable (also called the response variable) and one or more independent variables (also called predictor variables) by fitting a linear equation (a straight line) to observed data.
+[Linear regression](https://en.wikipedia.org/wiki/Simple_linear_regression) is a statistical method used to model the relationship between a dependent variable (also called the response variable) and one or more independent variables (also called predictor variables) by fitting a linear equation (a straight line) to observed data.
 
 We used simple linear regression in this scenario.
 ### Simple Linear regression
