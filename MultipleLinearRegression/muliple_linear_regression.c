@@ -67,6 +67,43 @@ unsigned int mlr_train(gsl_matrix *x_data,gsl_vector *y_data, gsl_vector *coeff_
     return 0; //No errors
 }
 
+unsigned int refine_mlr_gradient_descent(gsl_matrix*x_data,gsl_vector *y_data,gsl_vector *coeff_set, unsigned int iterations,double learning_rate){
+    size_t n = x_data->size2; // number of features
+    size_t m = x_data->size1; // number of data
+
+    //Allocating required local scoped vectors 
+    gsl_vector *gradient = gsl_vector_alloc(n);
+    gsl_vector *prediction_set = gsl_vector_alloc(m);
+    gsl_vector *error_set = gsl_vector_alloc(m);
+
+    if(!gradient||!prediction_set||!error_set) return 1; // 1 is for system error
+
+    for(int i=0;i<iterations;i++){
+        //populate prediction_set = x_data*coeff_set
+        gsl_blas_dgemv(CblasNoTrans,1,x_data,coeff_set,0,prediction_set);
+
+        // Calculate error_set = prediction_set - y_data
+        gsl_vector_memcpy(error_set,prediction_set);
+        gsl_vector_sub(error_set,y_data);
+
+        //gradient = 1/(number of data) * x_dataTranspose*error_set
+        // In actual formula its 2/m but here 1 is taken for scaling
+        gsl_blas_dgemv(CblasTrans,1.0/m,x_data,error_set,0,gradient);
+
+        // coeff_set = coeff_set - learning_rate*gradient
+        gsl_blas_daxpy(-learning_rate,gradient,coeff_set);
+
+    }
+
+    // Free allocated memory
+    gsl_vector_free(gradient);
+    gsl_vector_free(prediction_set);
+    gsl_vector_free(error_set);
+
+    return 0; //No errors
+
+}
+
 void mlr_predict(gsl_matrix *x_new,gsl_vector *y_new,gsl_vector *coeff_set){
     gsl_blas_dgemv(CblasNoTrans,1.0,x_new,coeff_set,1.0,y_new);
 }

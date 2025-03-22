@@ -96,10 +96,51 @@ Where:
 - \( \boldsymbol{\beta} \) is the coefficient vector.
 
 
+### Refining \(\beta \) with Gradient Descent 
+
+If we want to refine the model's accuracy even more, we can use **Gradient Descent** ( one o the many optimisation algorithms used to find the minimum of a function ).
+
+##### Why do we want to find the minimum of a function?
+
+Every model has a  loss function, which quantifies error between predicted and actual values. By minimising this function, we minimise the error. 
+For this model the loss function can be taken as the Mean Squared Error (MSE)
+The **MSE** for a Multiple Linear Regression (MLR) model is:
+
+\[
+MSE(\beta) = \frac{1}{n} \sum_{i=1}^{n} (y_i - X_i \beta)^2
+\]
+
+Where:
+- \( y \) is the vector of target values (observed).
+- \( X \) is the design matrix (input features).
+- \( \beta \) is the coefficient vector.
+- \( \hat{y} = X\beta \) is the predicted values.
+
+### Gradient of the MSE
+To minimize the MSE, we need to compute the gradient with respect to \( \beta \):
+
+\[
+\nabla_{\beta} MSE(\beta) = \frac{2}{n} X^T (X\beta - y)
+\]
+
+### Gradient Descent Update Rule
+The gradient descent update rule is:
+
+\[
+\beta_{\text{new}} = \beta_{\text{old}} - \alpha \cdot \nabla_{\beta} MSE(\beta)
+\]
+
+Where:
+- \( \alpha \) is the learning rate.
+- \( \nabla_{\beta} MSE(\beta) = \frac{2}{n} X^T (X\beta - y) \) is the gradient of the MSE.
+
+
+
 ---
 ### Our Implementation
 \(\ X \) and \(\ Y \) are the datasets we will use to train the model and obtain \(\beta \).
-Once \(\beta \) is computed from the provided dataset, we may use it to predict values of new inputs by the above equation
+Once \(\beta \) is computed from the provided dataset, we will use gradient descent to refine it.
+Then we may use it to predict values of new inputs by the above equation
 
 ---
 ### :file_folder: Files

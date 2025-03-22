@@ -64,6 +64,53 @@ unsigned int mlr_train(gsl_matrix *x_data, gsl_vector *y_data, gsl_vector *coeff
 */
 
 /*
+ * Function: refine_mlr_gradient_descent
+ * ----------------------------
+ */
+unsigned int refine_mlr_gradient_descent(gsl_matrix *x_data, gsl_vector *y_data, gsl_vector *coeff_set, unsigned int iterations, double learning_rate);
+/*
+ * Performs **Gradient Descent** to optimize the coefficients for a **Multiple Linear Regression (MLR)**
+ * model using the standard least squares objective function. The function iteratively updates the coefficients
+ * by calculating the gradient of the error with respect to the coefficients, and adjusting the coefficients
+ * based on the learning rate.
+ *
+ * The model is represented by the equation:
+ *   y = β0 + β1 * x1 + β2 * x2 + ... + βn * xn
+ * Where:
+ *   - y: Dependent variable (target).
+ *   - β0: Intercept (bias).
+ *   - β1, β2, ..., βn: Coefficients for the independent variables (x1, x2, ..., xn).
+ *
+ * The objective function being minimized is the **Mean Squared Error (MSE)**:
+ *   MSE = (1/n) * Σ(y_i - (β0 + β1 * x1_i + ... + βn * xn_i))^2
+ * Where n is the number of data points and x1_i, x2_i, ..., xn_i are the features of the i-th data point.
+ *
+ * The **Gradient Descent** algorithm updates the coefficients by moving in the direction opposite to the gradient
+ * of the cost function:
+ *   β_new = β_old - α * gradient
+ * Where:
+ *   - α is the learning rate (step size).
+ *   - gradient is the derivative of the MSE with respect to the coefficients.
+ *
+ * Arguments:
+ *    - x_data: A pointer to a `gsl_matrix` representing the independent variables (X), where the matrix has 
+ *      dimensions (m x n), with m being the number of data points and n being the number of features.
+ *    - y_data: A pointer to a `gsl_vector` representing the dependent variable (y), with m data points corresponding 
+ *      to the rows of `x_data`.
+ *    - coeff_set: A pointer to a `gsl_vector` that will store the resulting coefficients (including intercept) after 
+ *      training. It will be updated iteratively during the gradient descent process.
+ *    - iterations: An unsigned integer representing the number of iterations (or steps) to run the gradient descent 
+ *      optimization process. More iterations may lead to a better approximation of the optimal coefficients.
+ *    - learning_rate: A double representing the step size for the gradient descent updates. A higher learning rate may 
+ *      cause the algorithm to overshoot the optimal values, while a lower learning rate may result in slower convergence.
+ *
+ * Returns:
+ *    - `0` if the gradient descent optimization was successful and the coefficients were updated.
+ *    - `1` if there was a system error (e.g., memory allocation failure).
+ */
+
+
+/*
  * Function: mlr_predict
  * ----------------------------
  */
