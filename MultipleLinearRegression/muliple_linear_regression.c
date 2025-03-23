@@ -41,7 +41,11 @@ unsigned int mlr_train(gsl_matrix *x_data,gsl_vector *y_data, gsl_vector *coeff_
     gsl_matrix *x_trans_x = gsl_matrix_alloc(x_data->size2, x_data->size2);
     gsl_vector *x_trans_y = gsl_vector_alloc(x_data->size2);  // X^T * Y
     
-    if(!x_trans_x||!x_trans_y) return 1; // 1 is for system error
+    if(!x_trans_x||!x_trans_y) {
+        if(x_trans_x)gsl_matrix_free(x_trans_x);
+        if(x_trans_y)gsl_vector_free(x_trans_y);        
+        return 1;
+        } // 1 is for system error
     // x_trans_x=(x_data^t)(x_data)
     gsl_blas_dgemm(CblasTrans, CblasNoTrans, 1.0, x_data, x_data, 0.0, x_trans_x);
     // x_trans_y=(x_data^t)(y_data)
@@ -76,7 +80,12 @@ unsigned int refine_mlr_gradient_descent(gsl_matrix*x_data,gsl_vector *y_data,gs
     gsl_vector *prediction_set = gsl_vector_alloc(m);
     gsl_vector *error_set = gsl_vector_alloc(m);
 
-    if(!gradient||!prediction_set||!error_set) return 1; // 1 is for system error
+    if(!gradient||!prediction_set||!error_set) {
+        if(gradient)gsl_vector_free(gradient);
+        if(prediction_set)gsl_vector_free(prediction_set);
+        if(error_set)gsl_vector_free(error_set);
+        return 1;
+        } // 1 is for system error
 
     for(int i=0;i<iterations;i++){
         //populate prediction_set = x_data*coeff_set
