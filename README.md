@@ -22,7 +22,7 @@ Used for the wide range of linear algebra utilities that are essential for model
 
 1. [Linear Regression Model](https://github.com/Neel2k5/Clearn/tree/master/LinearRegression)
 2. [Multiple Linear Regression Model](https://github.com/Neel2k5/Clearn/tree/master/MultipleLinearRegression)
-
+3. [Logistic Regression](https://github.com/Neel2k5/Clearn/tree/master/LogisticRegression)
 ---
 ## Contributions
 
